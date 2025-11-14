@@ -62,6 +62,12 @@
 
     <div class="layout-content">
       {{ page.content }}
+
+      {{ include('unfussy:button', {
+  text: 'Click me',
+  url: '/node/1',
+  variant: 'primary'
+}) }}
     </div>{# /.layout-content #}
 
     {% if page.sidebar_first %}

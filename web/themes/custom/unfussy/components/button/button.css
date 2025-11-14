@@ -1,0 +1,21 @@
+.c-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.c-button--primary {
+  background: black;
+  color: white;
+}
+
+.c-button--secondary {
+  background: white;
+  color: black;
+}

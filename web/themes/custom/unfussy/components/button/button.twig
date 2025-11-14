@@ -1,0 +1,14 @@
+{% set classes = [
+  'c-button',
+  'c-button--' ~ (variant|default('primary'))
+] %}
+
+{% if url %}
+  <a href="{{ url }}" class="{{ classes|join(' ') }}">
+    {{ text }}
+  </a>
+{% else %}
+  <button class="{{ classes|join(' ') }}">
+    {{ text }}
+  </button>
+{% endif %}

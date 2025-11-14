@@ -1,0 +1,24 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/11.x/core/modules/sdc/src/metadata.schema.json
+name: "Button"
+props:
+  type: object
+  properties:
+    text:
+      type: string
+      title: Button text
+    url:
+      type: string
+      title: Button URL
+    variant:
+      type: string
+      title: Button variant
+      default: "primary"
+      enum:
+        - primary
+        - secondary
+  required:
+    - text
+libraryOverrides:
+  css:
+    component:
+      button.css: {}
