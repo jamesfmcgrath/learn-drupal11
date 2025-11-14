@@ -1,0 +1,23 @@
+uuid: 7c83037c-4a8d-4562-9f1a-b5980813f575
+langcode: en
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - unfussy
+_core:
+  default_config_hash: _nZjxxdypO6xrOAJkCYD81v0L7wh2zbCAVO7_C-UKIc
+id: unfussy_search_form_narrow
+theme: unfussy
+region: primary_menu
+weight: -4
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form (narrow)'
+  label_display: '0'
+  provider: search
+  page_id: null
+visibility: {  }

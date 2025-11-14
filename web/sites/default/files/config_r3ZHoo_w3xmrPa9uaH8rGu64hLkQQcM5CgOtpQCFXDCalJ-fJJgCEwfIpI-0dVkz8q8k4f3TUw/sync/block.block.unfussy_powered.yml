@@ -1,0 +1,22 @@
+uuid: 915e60a5-a543-4da6-a737-23eadec62e01
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - unfussy
+_core:
+  default_config_hash: eYL19CLDyinGTWYQfBD1DswWzglEotE_kHnHx3AxTXM
+id: unfussy_powered
+theme: unfussy
+region: sidebar_first
+weight: 0
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,22 @@
+uuid: c88cfd8d-e7c0-4e47-a137-74fd68028140
+langcode: en
+status: true
+dependencies:
+  theme:
+    - unfussy
+_core:
+  default_config_hash: ydSxdq7R66I8UMC460rOzlfzvlUL4VRbdwc6z9DWaUI
+id: unfussy_secondary_local_tasks
+theme: unfussy
+region: highlighted
+weight: -2
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Secondary tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

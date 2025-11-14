@@ -1,0 +1,22 @@
+uuid: 57144253-c1a6-4d6c-8924-f9711264c5e3
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - unfussy
+_core:
+  default_config_hash: VhBzWb7lMRtIOg9G7VSw_0uopi-7zXeHq4vXqqV1HFE
+id: unfussy_breadcrumbs
+theme: unfussy
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

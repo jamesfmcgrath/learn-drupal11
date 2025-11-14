@@ -2,3 +2,140 @@ name: learn-drupal11-app
 recipe: drupal11
 config:
   webroot: web
+  php: "8.3"
+  database: mariadb:10.11
+
+proxy:
+  mailhog:
+    - mail.learn-drupal11-app.lndo.site
+  adminer:
+    - adminer.learn-drupal11-app.lndo.site
+
+services:
+  appserver:
+    scanner:
+      retry: 5
+    xdebug: true
+    build_as_root:
+      # Disable Xdebug during build for performance
+      - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload
+    overrides:
+      environment:
+        DRUSH_OPTIONS_ROOT: "/app/web"
+        DRUSH_OPTIONS_URI: "https://learn-drupal11-app.lndo.site"
+        SIMPLETEST_BASE_URL: "http://learn-drupal11-app.lndo.site"
+        SIMPLETEST_DB: "mysql://drupal11:drupal11@database/drupal11"
+        MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName": "chrome", "goog:chromeOptions": {"args": ["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://chromedriver:9515"]'
+        BROWSERTEST_OUTPUT_DIRECTORY: "/app/web/sites/simpletest/browser_output"
+        BROWSERTEST_OUTPUT_BASE_URL: "http://learn-drupal11-app.lndo.site"
+        # Support debugging CLI with Xdebug
+        PHP_IDE_CONFIG: "serverName=appserver"
+        XDEBUG_SESSION: "lando"
+    build:
+      - mkdir -p web/sites/simpletest/browser_output
+
+  database:
+    creds:
+      user: drupal11
+      password: drupal11
+      database: drupal11
+
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver
+    portforward: true
+
+  adminer:
+    type: compose
+    services:
+      image: dehy/adminer
+      command: "/bin/s6-svscan /etc/services.d"
+    portforward: true
+
+  node:
+    type: "node:20"
+    overrides:
+      ports:
+        - "3051:3050"
+
+  chromedriver:
+    type: compose
+    scanner: false
+    services:
+      image: drupalci/webdriver-chromedriver:production
+      ports:
+        - "9516:9515"
+      security_opt:
+        - seccomp:unconfined
+      command: chromedriver --verbose --allowed-ips= --allowed-origins=*
+
+tooling:
+  composer:
+    service: appserver
+    cmd: /usr/local/bin/composer
+
+  drush:
+    service: appserver
+    cmd: "/app/vendor/bin/drush"
+
+  phpcs:
+    service: appserver
+    description: "Run PHP Code Sniffer"
+    cmd: "/app/vendor/bin/phpcs -p"
+
+  phpcbf:
+    service: appserver
+    description: "Run PHP Code Beautifier and Fixer"
+    cmd: "/app/vendor/bin/phpcbf"
+
+  phpstan:
+    service: appserver
+    description: "Run PHPStan static analysis"
+    cmd: "/app/vendor/bin/phpstan"
+
+  phpunit:
+    service: appserver
+    description: "Run PHPUnit tests"
+    cmd: "/app/vendor/bin/phpunit --testdox"
+
+  xdebug-on:
+    service: appserver
+    description: Enable Xdebug for Apache
+    cmd: rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && docker-php-ext-enable xdebug && /etc/init.d/apache2 reload && echo "Xdebug enabled"
+    user: root
+
+  xdebug-off:
+    service: appserver
+    description: Disable Xdebug for Apache
+    cmd: rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload && echo "Xdebug disabled"
+    user: root
+
+  node:
+    service: node
+
+  npm:
+    service: node
+
+  yarn:
+    service: node
+
+  install-frontend:
+    service: node
+    description: "Install Drupal core frontend dependencies"
+    cmd: cd /app/web/core && cp -f /app/web/core/.prettierrc.json /app/web/.prettierrc.json && cp -f /app/web/core/.prettierignore /app/.prettierignore && npm i
+
+  eslint-js:
+    service: node
+    description: "Run ESLint on JavaScript files"
+    cmd: /app/web/core/node_modules/eslint/bin/eslint.js --ext .js --resolve-plugins-relative-to=./web/core
+
+  eslint-yml:
+    service: node
+    description: "Run ESLint on YAML files"
+    cmd: /app/web/core/node_modules/eslint/bin/eslint.js --ext .yml --resolve-plugins-relative-to=./web/core
+
+  stylelint:
+    service: node
+    description: "Run Stylelint on CSS files"
+    cmd: /app/web/core/node_modules/.bin/stylelint --ignore-path /app/web/core/.stylelintignore --config /app/web/core/.stylelintrc.json

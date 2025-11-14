@@ -46,12 +46,52 @@ This project uses [Lando](https://lando.dev/) for local development.
 - **Start the site**: `lando start`
 - **Stop the site**: `lando stop`
 - **Rebuild Lando**: `lando rebuild -y`
-- **Access the site**: Check `lando info` for the URL (typically `https://drupal11.lndo.site`)
+- **Access the site**: Check `lando info` for the URL (typically `https://learn-drupal11.lndo.site`)
 - **Run Drush commands**: `lando drush [command]`
 - **Run Composer commands**: `lando composer [command]`
 - **Clear cache**: `lando drush cr`
 - **Database import**: `lando db-import database.sql`
 - **Database export**: `lando db-export database.sql`
+
+### Development Services
+
+The Lando environment includes several helpful services:
+
+- **MailHog**: Email testing - [https://mail.learn-drupal11.lndo.site](https://mail.learn-drupal11.lndo.site)
+  - Catches all emails sent from Drupal
+  - No emails sent to real addresses
+- **Adminer**: Database management GUI - [https://adminer.learn-drupal11.lndo.site](https://adminer.learn-drupal11.lndo.site)
+  - Visual database browser and editor
+  - Credentials: `drupal11` / `drupal11` / `drupal11`
+- **ChromeDriver**: Automated browser testing support
+- **Node.js 20**: Frontend tooling and JavaScript development
+
+### Debugging with Xdebug
+
+Xdebug is available but disabled by default for performance:
+
+- **Enable Xdebug**: `lando xdebug-on`
+- **Disable Xdebug**: `lando xdebug-off`
+
+Configure your IDE with:
+
+- Server name: `appserver`
+- Path mappings: Map your local project root to `/app`
+
+### Code Quality Tools
+
+- **PHP CodeSniffer**: `lando phpcs [path]` - Check coding standards
+- **PHP Code Beautifier**: `lando phpcbf [path]` - Auto-fix coding standards
+- **PHPStan**: `lando phpstan [options]` - Static analysis
+- **PHPUnit**: `lando phpunit [options]` - Run tests
+
+### Frontend Development
+
+- **Install core frontend dependencies**: `lando install-frontend`
+- **ESLint (JavaScript)**: `lando eslint-js [path]`
+- **ESLint (YAML)**: `lando eslint-yml [path]`
+- **Stylelint (CSS)**: `lando stylelint [path]`
+- **Node/NPM**: `lando node` / `lando npm` / `lando yarn`
 
 ### Development Tools
 

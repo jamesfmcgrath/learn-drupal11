@@ -1,0 +1,22 @@
+uuid: 9cc153fd-2a00-4a18-af6d-4706c492aaa9
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - unfussy
+_core:
+  default_config_hash: BZ5tpW7H8X4PVGRm3MImTIHd2tN0eF7zOtp4SpRYUA0
+id: unfussy_messages
+theme: unfussy
+region: highlighted
+weight: -5
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }
