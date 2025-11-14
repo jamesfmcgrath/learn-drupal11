@@ -32,20 +32,20 @@ composer.lock
 # -------------------------------------------------------------
 # Drupal Core & Contrib (managed by Composer)
 # -------------------------------------------------------------
-/core/
-/modules/contrib/
-/themes/contrib/
-/profiles/contrib/
+/web/core/
+/web/modules/contrib/
+/web/themes/contrib/
+/web/profiles/contrib/
 
 # -------------------------------------------------------------
 # Drupal Sites Directory
 # -------------------------------------------------------------
-/sites/*/files
-/sites/*/private
+/web/sites/*/files
+/web/sites/*/private
 
-/sites/*/settings.local.php
-/sites/development.services.yml
-/sites/*/services.local.yml
+/web/sites/*/settings.local.php
+/web/sites/development.services.yml
+/web/sites/*/services.local.yml
 
 # Drush contrib
 /drush/contrib/
