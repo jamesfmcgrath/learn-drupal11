@@ -1,0 +1,67 @@
+# -------------------------------------------------------------
+# Lando
+# -------------------------------------------------------------
+.lando.local.yml
+.lando.yml~
+.lando.log
+
+# Local Docker/Lando artifacts
+.docker
+.dockerignore
+
+# -------------------------------------------------------------
+# OS / Editor
+# -------------------------------------------------------------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*.tmp
+
+# -------------------------------------------------------------
+# Composer / PHP
+# -------------------------------------------------------------
+/vendor/
+composer.phar
+# (Optional) If your repo is a *project*, commit composer.lock.
+# If you want to stay in sync with upstream (LGD), ignore it.
+composer.lock
+
+# -------------------------------------------------------------
+# Drupal Core & Contrib (managed by Composer)
+# -------------------------------------------------------------
+/core/
+/modules/contrib/
+/themes/contrib/
+/profiles/contrib/
+
+# -------------------------------------------------------------
+# Drupal Sites Directory
+# -------------------------------------------------------------
+/sites/*/files
+/sites/*/private
+
+/sites/*/settings.local.php
+/sites/development.services.yml
+/sites/*/services.local.yml
+
+# Drush contrib
+/drush/contrib/
+
+# -------------------------------------------------------------
+# Cache / Logs
+# -------------------------------------------------------------
+/tmp/
+/cache/
+/logs/
+.phpunit.result.cache
+
+# -------------------------------------------------------------
+# Node (if you experiment later)
+# -------------------------------------------------------------
+/node_modules/
+npm-debug.log
+pnpm-debug.log
+yarn-error.log
